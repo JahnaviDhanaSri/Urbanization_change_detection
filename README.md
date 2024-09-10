@@ -4,6 +4,12 @@ Urbanization change detection from Landsat 8 images using Data Analytics and Mac
 # Overview
 This project focuses on detecting urbanization changes using Landsat 8 satellite imagery. The aim is to analyze urban expansion over time by computing various indices and applying machine learning techniques to track and predict changes.
 
+# DataSet Collection
+Data Source:
+
+The data for this project was collected from the Google Earth Engine (GEE) platform. The Landsat 8 Surface Reflectance dataset was utilized to obtain satellite imagery for the analysis of urbanization changes.
+
+
 # Key Features
 Satellite Data: Utilizes Landsat 8 bands (Blue, Green, Red, NIR, SWIR1, SWIR2) for analysis.
 
