@@ -1,6 +1,6 @@
-// -------------------------------
+
 // Area of Interest (AOI) 
-// -------------------------------
+
 var customBounds = ee.Geometry.Polygon(
   [[
     [81.2725, 16.8500], // southwest corner
@@ -10,22 +10,22 @@ var customBounds = ee.Geometry.Polygon(
   ]]
 );
 
-// -------------------------------
+
 // Date range and the list of years
-// -------------------------------
+
 var startYear = 2014;
 var endYear = 2024;
 var years = ee.List.sequence(startYear, endYear);
 
-// -------------------------------
+
 // Access the Landsat 8 Surface Reflectance dataset
-// -------------------------------
+
 var dataset = ee.ImageCollection('LANDSAT/LC08/C02/T1_L2')
                 .filterBounds(customBounds);
 
-// -------------------------------
+
 // Cloud Masking Function
-// -------------------------------
+
 function maskL8sr(image) {
   var qaPixel = image.select('QA_PIXEL');
   var mask = qaPixel.bitwiseAnd(1 << 3).eq(0) // clear
@@ -36,9 +36,9 @@ function maskL8sr(image) {
 // Apply cloud mask to dataset
 dataset = dataset.map(maskL8sr);
 
-// -------------------------------
+
 // Function to export bands for each year
-// -------------------------------
+
 var exportBandsForYear = function(year) {
   var yearStr = ee.Number(year).format('%04d');
   // Seasonal filter → Jan to May (clearer skies, less monsoon disturbance)
@@ -81,9 +81,9 @@ var exportBandsForYear = function(year) {
   });
 };
 
-// -------------------------------
+
 // Apply the export function to each year
-// -------------------------------
+
 years.evaluate(function(yearList) {
   yearList.forEach(function(year) {
     exportBandsForYear(year);
